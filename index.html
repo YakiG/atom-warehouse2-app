@@ -157,12 +157,15 @@
             backdrop-filter: blur(10px);
         }
 
-        @keyframes scaleIn {
-    from {
+    @keyframes scaleIn {
+    0% {
         opacity: 0;
-        transform: scale(0.3);  /* Ещё меньше */
+        transform: scale(0);
     }
-    to {
+    70% {
+        transform: scale(1.15);  /* Чуть больше чем надо */
+    }
+    100% {
         opacity: 1;
         transform: scale(1);
     }
