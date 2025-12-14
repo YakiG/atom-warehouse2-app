@@ -1268,7 +1268,7 @@ if (window.supabase) {
 
                         if (name && qty && unit) {
                             if (supabase) {
-                                await supabase.from('inventory').insert([{
+                                await supabase.from('inventory2').insert([{
                                     name, quantity: qty, unit, user_id: currentUser.id, created_at: new Date().toISOString()
                                 }]);
                             } else {
@@ -1326,7 +1326,7 @@ if (window.supabase) {
         }
     } else {
         // Offline mode
-        items = JSON.parse(localStorage.getItem('inventory')) || [];
+        items = JSON.parse(localStorage.getItem('inventory2')) || [];
         const savedUser = localStorage.getItem('currentUser');
         if (savedUser) {
             currentUser = { id: savedUser };
@@ -1391,7 +1391,7 @@ if (window.supabase) {
             await supabase.auth.signOut();
         }
         localStorage.removeItem('currentUser');
-        localStorage.removeItem('inventory');
+        localStorage.removeItem('inventory2');
         currentUser = null;
         items = [];
         showLoginScreen();
@@ -1411,7 +1411,7 @@ if (window.supabase) {
     
     try {
         const { data, error } = await supabase
-            .from('inventory')
+            .from('inventory2')
             .select('*')
             .eq('user_id', currentUser.id)
             .order('created_at', { ascending: false });
@@ -1441,7 +1441,7 @@ if (window.supabase) {
             
             try {
                 const { error } = await supabase
-                    .from('inventory')
+                    .from('inventory2')
                     .update({ quantity: newQuantity })
                     .eq('id', itemId)
                     .eq('user_id', currentUser.id);
@@ -1474,7 +1474,7 @@ if (window.supabase) {
     
     try {
         const { data, error } = await supabase
-            .from('inventory')
+            .from('inventory2')
             .insert([{
                 name: name,
                 quantity: qty,
@@ -1511,7 +1511,7 @@ if (window.supabase) {
             
             try {
                 const { error } = await supabase
-                    .from('inventory')
+                    .from('inventory2')
                     .delete()
                     .eq('id', currentEditId)
                     .eq('user_id', currentUser.id);
@@ -1549,7 +1549,7 @@ if (window.supabase) {
             const newQty = item.quantity - qty;
 
             if (supabase) {
-                const { error } = await supabase.from('inventory')
+                const { error } = await supabase.from('inventory2')
                     .update({ quantity: newQty }).eq('id', currentEditId);
                 if (error) {
                     showMessage('Ошибка: ' + error.message);
@@ -1589,7 +1589,7 @@ if (window.supabase) {
             const newQty = item.quantity + qty;
 
             if (supabase) {
-                const { error } = await supabase.from('inventory')
+                const { error } = await supabase.from('inventory2')
                     .update({ quantity: newQty }).eq('id', currentEditId);
                 if (error) {
                     showMessage('Ошибка: ' + error.message);
@@ -1618,7 +1618,7 @@ if (window.supabase) {
 
         async function deleteItemConfirm() {
             if (supabase) {
-                const { error } = await supabase.from('inventory').delete().eq('id', currentEditId);
+                const { error } = await supabase.from('inventory2').delete().eq('id', currentEditId);
                 if (error) {
                     showMessage('Ошибка: ' + error.message);
                     return;
@@ -1750,7 +1750,7 @@ function hideMainApp() {
 }
 
         function saveData() {
-            localStorage.setItem('inventory', JSON.stringify(items));
+            localStorage.setItem('inventory2', JSON.stringify(items));
         }
 
         function showMessage(text) {
