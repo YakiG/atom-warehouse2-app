@@ -97,15 +97,21 @@
             animation: float 8s ease-in-out infinite reverse;
         }
 
-        @keyframes float {
+    @keyframes float {
     0% {
-        transform: rotate(0deg) scale(1);
+        transform: translateY(0px) translateX(0px);
+    }
+    25% {
+        transform: translateY(-20px) translateX(10px);
     }
     50% {
-        transform: rotate(5deg) scale(1.05);
+        transform: translateY(-40px) translateX(0px);
+    }
+    75% {
+        transform: translateY(-20px) translateX(-10px);
     }
     100% {
-        transform: rotate(0deg) scale(1);
+        transform: translateY(0px) translateX(0px);
     }
 }
 
